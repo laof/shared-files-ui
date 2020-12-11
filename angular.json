@@ -135,5 +135,8 @@
       }
     }
   },
-  "defaultProject": "shared-files-ui"
+  "defaultProject": "shared-files-ui",
+  "cli": {
+    "analytics": false
+  }
 }
