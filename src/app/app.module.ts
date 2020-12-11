@@ -11,15 +11,21 @@ import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { FilesComponent } from './files/files.component';
+import { ChatComponent } from './chat/chat.component';
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilesComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
+    NzIconModule,
     AppRoutingModule,
     FormsModule,
     NzMenuModule,

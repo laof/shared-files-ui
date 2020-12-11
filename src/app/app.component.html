@@ -1,11 +1,12 @@
 <ul nz-menu nzMode="horizontal">
   <li nz-menu-item nzSelected>
     <i nz-icon nzType="share-alt" nzTheme="outline"></i>
-    Navigation One
+    <a routerLink="files">English Menu files</a>
   </li>
   <li nz-menu-item>
-    <i nz-icon nzType="appstore"></i>
-    Navigation Two
+    <i nz-icon nzType="wechat" nzTheme="outline"></i>
+    <a routerLink="chat">English Menu chat</a>
   </li>
   <li nz-menu-item>Navigation Four - Link</li>
 </ul>
+<router-outlet></router-outlet>
