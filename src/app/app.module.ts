@@ -37,6 +37,7 @@ const LoadNzModuel = [
 ]
 
 import { ScanOutline, ShakeOutline, WechatOutline, SendOutline, CloudUploadOutline, HomeOutline, RollbackOutline, LoadingOutline } from '@ant-design/icons-angular/icons';
+import { RouterModule } from '@angular/router';
 const icons = [ScanOutline, ShakeOutline, WechatOutline, SendOutline, CloudUploadOutline, HomeOutline, RollbackOutline, LoadingOutline];
 
 @NgModule({
@@ -55,7 +56,7 @@ const icons = [ScanOutline, ShakeOutline, WechatOutline, SendOutline, CloudUploa
     BrowserAnimationsModule
   ],
   providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    // { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: NZ_I18N, useValue: zh_CN },
     { provide: HTTP_INTERCEPTORS, useClass: CommonHttpInterceptor, multi: true }
   ],
