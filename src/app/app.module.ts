@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
-import zh from '@angular/common/locales/zh';
+import en from '@angular/common/locales/en';
 import { FilesComponent } from './files/files.component';
 import { ChatComponent } from './chat/chat.component';
 import { CommonHttpInterceptor } from './shared/http/http.interceptor';
@@ -23,13 +23,13 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-registerLocaleData(zh);
+registerLocaleData(en);
 
 const LoadNzModuel = [
   NzMenuModule,
   NzModalModule,
   NzUploadModule,
-  NzInputModule,
+  // NzInputModule,
   // NzIconModule,
   NzSwitchModule,
   NzButtonModule,
