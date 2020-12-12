@@ -136,14 +136,9 @@ export class FilesComponent implements OnInit {
     if (item.children) {
       this.children = this.sort(item.path);
     } else if (item.type === FileType.file) {
-      // const url = HttpLocalhost + item.download + '?token=' + localStorage.token;
-      const url = location.origin + item.download + '?token=' + localStorage.token;
-      if (this.view) {
-        const win: Window | null = window.open(url);
-        win && win.location.reload();
-      } else {
-        download(url);
-      }
+      // const url = HttpLocalhost + item.download;
+      const url = location.origin + item.download;
+      this.view ? window.open(url) : download(url);
     }
   }
 
