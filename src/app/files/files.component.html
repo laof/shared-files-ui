@@ -1,4 +1,4 @@
-<div class="clearfix">
+<div class="clearfix view">
   <nz-upload
     #uploadRef
     nzAction="/api/upload"
@@ -11,10 +11,9 @@
     <button nz-button><i nz-icon nzType="cloud-upload"></i>upload</button>
   </nz-upload>
 </div>
-<br /><br />
-
+<br />
 <div *ngIf="children.length; else loadingRef">
-  <div class="bar">
+  <div class="bar view">
     <ul class="btn">
       <li (click)="home()">
         <i nz-icon nzType="home" nzTheme="outline"></i>Home
@@ -31,23 +30,10 @@
         nzCheckedChildren="View"
         nzUnCheckedChildren="Off"
       ></nz-switch>
-
-      <button
-        class="upload"
-        nz-button
-        nzType="primary"
-        [nzSize]="size"
-        nzShape="round"
-        (click)="upload(uploadRef)"
-      >
-        <i nz-icon nzType="cloud-upload"></i>
-      </button>
-
-      <!-- <i nz-icon nzType="" nzTheme="outline"></i> -->
     </div>
   </div>
-
   <br />
+
   <ul class="file">
     <li *ngFor="let item of children">
       <a class="target" (click)="fileClick(item)">

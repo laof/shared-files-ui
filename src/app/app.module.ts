@@ -20,17 +20,22 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 registerLocaleData(zh);
 
 const LoadNzModuel = [
   NzMenuModule,
   NzUploadModule,
+  NzFormModule,
   NzIconModule,
   NzSwitchModule,
   NzButtonModule,
   NzSpinModule,
 ]
+
+import { ShakeOutline, WechatOutline, SendOutline, CloudUploadOutline, HomeOutline, RollbackOutline, LoadingOutline } from '@ant-design/icons-angular/icons';
+const icons = [ShakeOutline, WechatOutline, SendOutline, CloudUploadOutline, HomeOutline, RollbackOutline, LoadingOutline];
 
 @NgModule({
   declarations: [
@@ -40,6 +45,7 @@ const LoadNzModuel = [
   ],
   imports: [
     ...LoadNzModuel,
+    NzIconModule.forRoot(icons),
     BrowserModule,
     AppRoutingModule,
     FormsModule,

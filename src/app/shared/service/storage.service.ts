@@ -2,11 +2,9 @@ import { Injectable } from "@angular/core";
 
 class BaseStorage {
     stor = window.localStorage
-    myId = '_l_o_v_a_name1550299839288'
-    pathKey = '_l_o_v_a_path1550299839288'
-    viewKey = '_l_o_v_a_mode1550299839288'
-    tabsKey = '__l_o_v_a_tabs1550299839288'
-    gridListKey = '_l_o_v_a_grid_list1550299839288'
+    idKey = 'user_id_1550299839288'
+    pathKey = 'file_path_1550299839288'
+    viewKey = 'view_mode_1550299839288'
 
     setBase(key: string, value: any) {
         var stor = this.stor
@@ -25,12 +23,6 @@ class BaseStorage {
 
 @Injectable({ providedIn: 'root' })
 export class CommonStorageService extends BaseStorage {
-    memory = {
-        path: '',
-        mode: '',
-        gridList: '',
-        homePath: ''
-    };
 
     getPath() {
         return this.getBase(this.pathKey);
@@ -50,17 +42,16 @@ export class CommonStorageService extends BaseStorage {
         return this.getBase(this.viewKey);
     }
 
+    setMyId(value: string) {
+        this.setBase(this.idKey, value);
+    }
+
+    getMyId() {
+        return this.getBase(this.idKey);
+    }
+
     setView(value: boolean) {
-        this.memory.mode = value ? 'yes' : '';
-        this.setBase(this.viewKey, this.memory.mode);
+        this.setBase(this.viewKey, value ? 'yes' : '');
     }
 
-    getGridList() {
-        return this.getBase(this.gridListKey);
-    }
-
-    setGridList(str: string) {
-        this.memory.gridList = str;
-        this.setBase(this.gridListKey, str);
-    }
 }
