@@ -5,6 +5,7 @@ class BaseStorage {
     idKey = 'user_id_1550299839288'
     pathKey = 'file_path_1550299839288'
     viewKey = 'view_mode_1550299839288'
+    styleKey = 'style_1550299839288'
 
     setBase(key: string, value: any) {
         var stor = this.stor
@@ -28,30 +29,36 @@ export class CommonStorageService extends BaseStorage {
         return this.getBase(this.pathKey);
     }
 
+    getView() {
+        return this.getBase(this.viewKey);
+    }
+
+
+    getMyId() {
+        return this.getBase(this.idKey);
+    }
+
+    getStyle() {
+        return this.getBase(this.styleKey);
+    }
+
+
     setPath(path: string) {
         this.setBase(this.pathKey, path);
     }
 
-    removePath() {
-        if (this.stor) {
-            this.stor.removeItem(this.pathKey);
-        }
+    setView(value: boolean) {
+        this.setBase(this.viewKey, value ? 'yes' : '');
     }
 
-    getView() {
-        return this.getBase(this.viewKey);
+    setStyle(value: boolean) {
+        this.setBase(this.styleKey, value ? 'yes' : '');
     }
 
     setMyId(value: string) {
         this.setBase(this.idKey, value);
     }
 
-    getMyId() {
-        return this.getBase(this.idKey);
-    }
 
-    setView(value: boolean) {
-        this.setBase(this.viewKey, value ? 'yes' : '');
-    }
 
 }

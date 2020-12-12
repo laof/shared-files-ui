@@ -18,14 +18,7 @@ interface Message {
 export class ChatComponent implements OnInit, OnDestroy {
 
   myId: string = '';
-  list: Message[] = [{
-    author: 'fdasfa',
-    text: 'fdsfafd'
-  },
-  {
-    author: 'fdasfa',
-    text: 'fdsfafd'
-  }];
+  list: Message[] = [];
   text: string = '';
 
   private socket: any = null;
@@ -37,13 +30,12 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.storage.setMyId(new Date().getTime().toString())
     }
 
-    console.log(id);
     this.myId = this.storage.getMyId();
 
-    this.list.push({
-      author: this.myId,
-      text: '123'
-    })
+    // this.list.push({
+    //   author: this.myId,
+    //   text: '123'
+    // })
 
     const socket = io(HttpLocalhost);
     socket.on('connect', () => {
@@ -65,6 +57,19 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.list = list.concat(this.list);
     })
   }
+
+  send() {
+    this.socket.emit('chat message', this.text);
+    this.clear();
+  }
+
+  clear() {
+    this.text = '';
+  }
+
+  ngOnInit(): void {
+  }
+
   ngOnDestroy(): void {
     try {
       this.socket.disconnect();
@@ -72,47 +77,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     } catch (e) {
       console.log('socket ngOnDestroy error');
     }
-  }
-
-  send() {
-    this.socket.emit('chat message', this.text);
-    this.text = ''
-  }
-
-  talkMessage(html: string) {
-    // var ele = $('.talk-list').append(html)[0];
-    // ele.scrollTop = ele.scrollHeight;
-  }
-
-
-  getTalkTemp(data: any) {
-
-    // var myself = data.author === myId;
-    // var typeClass = myself ? 'my' : 'other';
-
-    // var talk = '';
-    // var pre = $('<pre/>').text(data.text).prop('outerHTML');
-
-    // var icon = '<i class="' + (myself ? 'am-icon-caret-right' : 'am-icon-caret-left') + '"></i>';
-
-    // if (myself) {
-    //   talk = pre + icon;
-    // } else {
-    //   talk = icon + pre;
-    // }
-
-    // var html = [
-    //   '<div class="take-item ', typeClass, '"><table><tr>',
-    //   '<td class="user-info other-info"><i></i></td>',
-    //   '<td class="text-rea">', talk, '</td>',
-    //   '<td class="user-info my-info"><i></i></td>',
-    //   '</tr></table></div>'
-    // ].join('');
-
-    // return html;
-  }
-
-  ngOnInit(): void {
   }
 
 }

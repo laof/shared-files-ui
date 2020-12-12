@@ -1,4 +1,19 @@
 <div class="view">
+  <ul>
+    <li [class.myself]="item.author === myId" *ngFor="let item of list">
+      <span>{{ item.text }}</span>
+    </li>
+  </ul>
+</div>
+
+<div class="view send-message">
+  <button (click)="send()" nz-button>
+    <i nz-icon nzType="send" nzTheme="outline"></i>Send
+  </button>
+  <button (click)="clear()" nz-button>
+    <i nz-icon nzType="clear" nzTheme="outline"></i>Clear
+  </button>
+  <br />
   <form nz-form>
     <textarea
       name="txt"
@@ -8,13 +23,4 @@
       spellcheck="false"
     ></textarea>
   </form>
-  <!--  -->
-  <button (click)="send()" nz-button>
-    <i nz-icon nzType="send" nzTheme="outline"></i>Send
-  </button>
-  <ul>
-    <li [class.myself]="item.author === myId" *ngFor="let item of list">
-      <span>{{ item.text }}</span>
-    </li>
-  </ul>
 </div>

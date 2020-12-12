@@ -32,10 +32,13 @@ export class FilesComponent implements OnInit {
   private root = '';
   private fileMap: any = {};
 
+  fileType = FileType.file;
+
   size: NzButtonSize = 'small';
   fileList: NzUploadFile[] = [];
   children: any = [];
   view = false;
+  style = false;
 
   cache = {
     path: '',
@@ -46,6 +49,7 @@ export class FilesComponent implements OnInit {
 
   constructor(private http: HttpClient, private storage: CommonStorageService) {
     this.view = !!this.storage.getView()
+    this.style = !!this.storage.getStyle()
     this.loadData();
   }
 
@@ -137,6 +141,11 @@ export class FilesComponent implements OnInit {
   onViewChange(value: boolean) {
     this.view = value
     this.storage.setView(value)
+  }
+
+  onStyleChange(value: boolean) {
+    this.style = value
+    this.storage.setStyle(value)
   }
 
   sort(key: string): any[] {
