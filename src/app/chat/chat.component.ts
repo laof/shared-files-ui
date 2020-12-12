@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpLocalhost, HttpUrl } from '../shared/http/http-url';
-import { io } from 'socket.io-client';
+import * as io from 'socket.io-client';
 import { CommonStorageService } from '../shared/service/storage.service';
+
 interface Message {
   author: string;
   text: string;
@@ -16,6 +17,8 @@ interface Message {
   styleUrls: ['./chat.component.less']
 })
 export class ChatComponent implements OnInit, OnDestroy {
+
+  @ViewChild('listRef', { static: false }) listRef: ElementRef | undefined;
 
   myId: string = '';
   list: Message[] = [];
@@ -39,14 +42,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     const socket = io(HttpLocalhost);
     socket.on('connect', () => {
-      console.log('22');
       socket.emit('chat message', this.myId);
     });
     socket.on('event', (data: any) => {
-      // console.log(data);
     });
     socket.on('chat message', (data: Message) => {
       this.list.push(data);
+      this.scrollTop();
     });
     socket.on('disconnect', () => { });
 
@@ -55,7 +57,18 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.http.post(HttpUrl.talkHistory, null).subscribe((res: any) => {
       const list: Message[] = res.list || [];
       this.list = list.concat(this.list);
+      this.scrollTop();
     })
+  }
+
+
+  scrollTop() {
+    setTimeout(() => {
+      const ele = this.listRef?.nativeElement;
+      if (ele) {
+        ele.scrollTop = ele.scrollHeight;
+      }
+    }, 100)
   }
 
   send() {

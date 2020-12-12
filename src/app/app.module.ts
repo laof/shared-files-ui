@@ -20,8 +20,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 registerLocaleData(zh);
 
@@ -29,8 +29,8 @@ const LoadNzModuel = [
   NzMenuModule,
   NzModalModule,
   NzUploadModule,
-  NzFormModule,
-  NzIconModule,
+  NzInputModule,
+  // NzIconModule,
   NzSwitchModule,
   NzButtonModule,
   NzSpinModule,
