@@ -17,6 +17,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {
     this.http.post(HttpUrl.host, null).subscribe((data: any) => {
       this.host = data.host;
+      localStorage.token = data.token;
     });
 
   }

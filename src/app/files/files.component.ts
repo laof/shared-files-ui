@@ -32,6 +32,8 @@ export class FilesComponent implements OnInit {
   private root = '';
   private fileMap: any = {};
 
+  loading = true;
+
   visibleScan = false;
 
   fileType = FileType.file;
@@ -117,7 +119,9 @@ export class FilesComponent implements OnInit {
 
 
   loadData() {
+    this.loading = true;
     this.http.post(HttpUrl.list, null).subscribe((data: any) => {
+      this.loading = false;
       if (data && data.success) {
         this.root = data.path;
         const path = this.storage.getPath() || this.root;
@@ -125,15 +129,20 @@ export class FilesComponent implements OnInit {
         this.setPathMap(data);
         this.children = this.sort(path);
       }
-    })
+    }, () => this.loading = false)
   }
 
   fileClick(item: FileItem) {
     if (item.children) {
       this.children = this.sort(item.path);
     } else if (item.type === FileType.file) {
-      const url = HttpLocalhost + item.download;
-      this.view ? window.open(url) : download(url);
+      const url = HttpLocalhost + item.download + '?token=' + localStorage.token;
+      if (this.view) {
+        const win: Window | null = window.open(url);
+        win && win.location.reload();
+      } else {
+        download(url);
+      }
     }
   }
 

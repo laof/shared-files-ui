@@ -13,7 +13,7 @@
     <button nz-button><i nz-icon nzType="cloud-upload"></i>upload</button>
   </nz-upload>
 </div>
-<div *ngIf="children.length; else loadingRef">
+<div *ngIf="!loading; else loadingRef">
   <div class="bar view">
     <ul class="btn">
       <li (click)="home()">
