@@ -32,8 +32,9 @@ export class FilesComponent implements OnInit {
   private root = '';
   private fileMap: any = {};
 
-  fileType = FileType.file;
+  visibleScan = false;
 
+  fileType = FileType.file;
   size: NzButtonSize = 'small';
   fileList: NzUploadFile[] = [];
   children: any = [];
@@ -112,8 +113,6 @@ export class FilesComponent implements OnInit {
   currentPath(path: string) {
     this.storage.setPath(path);
     this.cache.path = path;
-    // $('.path').html(path); // show current path
-    // $('#upload-dir').val(path); // upload params
   }
 
 
