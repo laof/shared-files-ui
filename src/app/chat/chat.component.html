@@ -1,7 +1,7 @@
 <div class="view message-list" #listRef>
   <table>
     <ng-container *ngFor="let item of list; let i = index">
-      <tr *ngIf="!item.text" [class.myself]="item.author === myId">
+      <tr [class.myself]="item.author === myId">
         <td>
           <pre class="mes">{{ item.text }}</pre>
           <!-- <span class="mes">{{ item.text }}</span> -->
@@ -24,7 +24,7 @@
       name="txt"
       placeholder="input text"
       [(ngModel)]="text"
-      (keyup.enter)="send()"
+      (keydown.enter)="send()"
       spellcheck="false"
     ></textarea>
   </form>

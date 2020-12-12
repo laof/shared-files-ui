@@ -72,12 +72,16 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   send() {
-    this.socket.emit('chat message', this.text);
+    if (this.text && this.text != '\n') {
+      this.socket.emit('chat message', this.text);
+    }
     this.clear();
   }
 
   clear() {
-    this.text = '';
+    setTimeout(() => {
+      this.text = '';
+    }, 0);
   }
 
   ngOnInit(): void {
