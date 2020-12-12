@@ -5,6 +5,11 @@ import { FilesComponent } from './files/files.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'files',
+    pathMatch: 'full'
+  },
+  {
     path: 'files',
     component: FilesComponent
   }, {

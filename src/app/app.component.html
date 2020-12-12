@@ -1,12 +1,13 @@
-<ul nz-menu nzMode="horizontal">
-  <li nz-menu-item nzSelected>
+<ul nz-menu nzMode="horizontal" nzTheme="dark">
+  <li nz-menu-item nzMatchRouter>
     <i nz-icon nzType="share-alt" nzTheme="outline"></i>
-    <a routerLink="files">English Menu files</a>
+    <a routerLink="files">File Sharing</a>
   </li>
-  <li nz-menu-item>
+  <li nz-menu-item nzMatchRouter>
     <i nz-icon nzType="wechat" nzTheme="outline"></i>
-    <a routerLink="chat">English Menu chat</a>
+    <a routerLink="chat">Text Chat</a>
   </li>
-  <li nz-menu-item>Navigation Four - Link</li>
 </ul>
-<router-outlet></router-outlet>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

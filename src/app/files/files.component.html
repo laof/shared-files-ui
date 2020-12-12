@@ -1,1 +1,71 @@
-<p>files works!</p>
+<div class="clearfix">
+  <nz-upload
+    #uploadRef
+    nzAction="/api/upload"
+    nzListType="picture"
+    [nzMultiple]="true"
+    nzName="upload"
+    [nzData]="{ dir: cache.path }"
+    [(nzFileList)]="fileList"
+  >
+    <button nz-button><i nz-icon nzType="cloud-upload"></i>upload</button>
+  </nz-upload>
+</div>
+<br /><br />
+
+<div *ngIf="children.length; else loadingRef">
+  <div class="bar">
+    <ul class="btn">
+      <li (click)="home()">
+        <i nz-icon nzType="home" nzTheme="outline"></i>Home
+      </li>
+      <li (click)="back()">
+        <i nz-icon nzType="rollback" nzTheme="outline"></i>Back
+      </li>
+    </ul>
+    <span class="path">{{ cache.path }}</span>
+    <div class="switch">
+      <nz-switch
+        [ngModel]="view"
+        (ngModelChange)="onViewChange($event)"
+        nzCheckedChildren="View"
+        nzUnCheckedChildren="Off"
+      ></nz-switch>
+
+      <button
+        class="upload"
+        nz-button
+        nzType="primary"
+        [nzSize]="size"
+        nzShape="round"
+        (click)="upload(uploadRef)"
+      >
+        <i nz-icon nzType="cloud-upload"></i>
+      </button>
+
+      <!-- <i nz-icon nzType="" nzTheme="outline"></i> -->
+    </div>
+  </div>
+
+  <br />
+  <ul class="file">
+    <li *ngFor="let item of children">
+      <a class="target" (click)="fileClick(item)">
+        <i
+          nz-icon
+          class="icon {{ item.type }}"
+          [nzType]="item.type === 'file' ? 'file' : 'folder'"
+          nzTheme="outline"
+        ></i>
+        <span> {{ item.name }} {{ toSize(item.size) }}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<ng-template #loadingRef>
+  <div class="loading-box">
+    <i nz-icon nzType="loading" nzTheme="outline"></i>
+    <p>loading</p>
+  </div>
+</ng-template>
