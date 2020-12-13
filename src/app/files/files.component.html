@@ -1,6 +1,6 @@
 <div *ngIf="fileList.length" class="upload-info">
   <button (click)="clearList()" nz-button>
-    <i nz-icon nzType="clear" nzTheme="outline"></i> Clear upload list
+    <i nz-icon nzType="clear" nzTheme="outline"></i> Clear
   </button>
   <span>{{ uplodInfo() }}</span>
 </div>
@@ -21,22 +21,22 @@
 </div>
 
 <div *ngIf="!loading; else loadingRef">
+  <div class="path">{{ cache.path }}</div>
   <div class="bar view">
     <ul class="btn">
       <li (click)="home()">
-        <i nz-icon nzType="home" nzTheme="outline"></i>Home
+        <i nz-icon nzType="home" nzTheme="outline"></i> Home
       </li>
       <li (click)="back()">
-        <i nz-icon nzType="rollback" nzTheme="outline"></i>Back
+        <i nz-icon nzType="rollback" nzTheme="outline"></i> Back
       </li>
       <li (click)="loadData()">
-        <i nz-icon nzType="reload" nzTheme="outline"></i>Reload
+        <i nz-icon nzType="reload" nzTheme="outline"></i> Reload
       </li>
     </ul>
-    <span class="path">{{ cache.path }}</span>
     <div class="switch">
       <nz-switch
-        [ngModel]="style"
+        [ngModel]="gridStyle"
         class="style"
         (ngModelChange)="onStyleChange($event)"
         nzCheckedChildren="grid"
@@ -51,25 +51,24 @@
       ></nz-switch>
     </div>
   </div>
-  <br />
-  <ul class="file" [class.grid]="style">
+  <ul class="file-box" [class.list]="!gridStyle" [class.grid]="gridStyle">
     <li
       *ngFor="let item of children"
       [title]="item.name + '  ' + toSize(item.size)"
+      class="target"
+      [class.file]="item.type === fileType"
     >
-      <a
-        class="target"
-        [class.file]="item.type === fileType"
+      <i
         (click)="fileClick(item)"
-      >
-        <i
-          nz-icon
-          class="flag-icon {{ item.type }}"
-          [nzType]="item.type === fileType ? 'file' : 'folder'"
-          nzTheme="outline"
-        ></i>
-        <span class="file-name"> {{ item.name }} {{ toSize(item.size) }}</span>
-      </a>
+        nz-icon
+        class="flag-icon {{ item.type }}"
+        [nzType]="item.type === fileType ? 'profile' : 'folder'"
+        nzTheme="outline"
+      ></i>
+      <label class="file-name">
+        <span (click)="fileClick(item)">{{ item.name }}</span>
+      </label>
+      <span class="file-size">{{ toSize(item.size) }}</span>
     </li>
   </ul>
 </div>

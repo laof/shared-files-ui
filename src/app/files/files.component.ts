@@ -43,7 +43,7 @@ export class FilesComponent implements OnInit {
   fileList: NzUploadFile[] = [];
   children: any = [];
   view = false;
-  style = false;
+  gridStyle = false;
 
   cache = {
     path: '',
@@ -54,7 +54,7 @@ export class FilesComponent implements OnInit {
 
   constructor(private http: HttpClient, private storage: CommonStorageService) {
     this.view = !!this.storage.getView()
-    this.style = !!this.storage.getStyle()
+    this.gridStyle = !!this.storage.getStyle()
     this.loadData();
   }
 
@@ -93,7 +93,7 @@ export class FilesComponent implements OnInit {
     var num = 1024.00;
     //byte
     if (!size) {
-      return numType ? 0 : 'No size';
+      return numType ? '0' : 'No size';
     }
     if (size < num) {
       return size + 'B';
@@ -135,6 +135,7 @@ export class FilesComponent implements OnInit {
   }
 
   fileClick(item: FileItem) {
+
     if (item.children) {
       this.children = this.sort(item.path);
     } else if (item.type === FileType.file) {
@@ -156,7 +157,7 @@ export class FilesComponent implements OnInit {
   }
 
   onStyleChange(value: boolean) {
-    this.style = value
+    this.gridStyle = value
     this.storage.setStyle(value)
   }
 
@@ -193,7 +194,7 @@ export class FilesComponent implements OnInit {
       const s = this.fileList.length;
       const t = this.toSize(total, true);
       const b = this.toSize(balance, true);
-      return `Total : ${s}   ( ${b} / ${t} )`
+      return `Total: ${s} (${b}/${t})`
     }
     return ''
   }
