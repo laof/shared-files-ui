@@ -36,9 +36,8 @@ const LoadNzModuel = [
   NzSpinModule,
 ]
 
-import { ScanOutline, ShakeOutline, WechatOutline, SendOutline, CloudUploadOutline, HomeOutline, RollbackOutline, LoadingOutline } from '@ant-design/icons-angular/icons';
-import { RouterModule } from '@angular/router';
-const icons = [ScanOutline, ShakeOutline, WechatOutline, SendOutline, CloudUploadOutline, HomeOutline, RollbackOutline, LoadingOutline];
+import { ScanOutline, ReloadOutline, ShakeOutline, WechatOutline, SendOutline, CloudUploadOutline, HomeOutline, RollbackOutline, LoadingOutline } from '@ant-design/icons-angular/icons';
+const icons = [ScanOutline, ReloadOutline, ShakeOutline, WechatOutline, SendOutline, CloudUploadOutline, HomeOutline, RollbackOutline, LoadingOutline];
 
 @NgModule({
   declarations: [

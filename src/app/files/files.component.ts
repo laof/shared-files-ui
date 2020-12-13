@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { HttpLocalhost, HttpUrl } from '../shared/http/http-url';
 import { CommonStorageService } from '../shared/service/storage.service';
-import * as download from 'downloadjs';
+import { saveAs } from 'file-saver';
 
 enum FileType {
   directory = 'directory',
@@ -31,6 +31,8 @@ interface FileItem {
 export class FilesComponent implements OnInit {
   private root = '';
   private fileMap: any = {};
+
+  uploadUrl = HttpUrl.upload;
 
   loading = true;
 
@@ -87,11 +89,11 @@ export class FilesComponent implements OnInit {
     }
   }
 
-  toSize(size: number) {
+  toSize(size: number, numType = false) {
     var num = 1024.00;
     //byte
     if (!size) {
-      return 'No size';
+      return numType ? 0 : 'No size';
     }
     if (size < num) {
       return size + 'B';
@@ -136,10 +138,16 @@ export class FilesComponent implements OnInit {
     if (item.children) {
       this.children = this.sort(item.path);
     } else if (item.type === FileType.file) {
-      // const url = HttpLocalhost + item.download;
-      const url = location.origin + item.download;
-      this.view ? window.open(url) : download(url);
+      const url = HttpLocalhost + item.download;
+      this.view ? window.open(url) : this.downloadHttp(item, url);
     }
+  }
+
+  downloadHttp(item: FileItem, url = '') {
+    saveAs(HttpLocalhost + item.download, item.name);
+    // this.http.post(HttpUrl.download, null, {
+    //   params: { file: this.root + item.download, fileName: item.name }
+    // }).subscribe(res => { })
   }
 
   onViewChange(value: boolean) {
@@ -169,6 +177,40 @@ export class FilesComponent implements OnInit {
       return directory.concat(files);
     }
     return [];
+  }
+
+  uplodInfo() {
+    let total = 0;
+    let balance = 0;
+    this.fileList.forEach(item => {
+      if (item.percent && item.size) {
+        total += item.size || 0;
+        balance += item.size * item.percent * 0.01;
+      }
+    });
+
+    if (this.fileList.length) {
+      const s = this.fileList.length;
+      const t = this.toSize(total, true);
+      const b = this.toSize(balance, true);
+      return `Total : ${s}   ( ${b} / ${t} )`
+    }
+    return ''
+  }
+
+  clearList() {
+    this.fileList = [];
+  }
+
+  uploadChange(data: NzUploadChangeParam) {
+    // if (data.type === 'success') {
+    //   const index = this.fileList.findIndex(item => {
+    //     return item.uid === data.file.uid
+    //   })
+    //   if (index != -1) {
+    //     this.fileList.splice(index, 1);
+    //   }
+    // }
   }
 
   ngOnInit(): void {
