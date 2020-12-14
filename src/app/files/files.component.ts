@@ -34,7 +34,7 @@ export class FilesComponent implements OnInit {
   private oldBalance = 0;
   allDone = false;
   uplodInfo = '';
-  speed = '';
+  speedInfo = '';
   uploadUrl = HttpUrl.upload;
 
   loading = true;
@@ -97,7 +97,7 @@ export class FilesComponent implements OnInit {
     }
   }
 
-  toSize(size: number, numType = false) {
+  toSize(size: number, numType = false): any {
     var num = 1024.0;
     //byte
     if (!size) {
@@ -194,7 +194,7 @@ export class FilesComponent implements OnInit {
     let done = 0;
 
     this.uplodInfo = '';
-    this.speed = '';
+    this.speedInfo = '';
 
     this.fileList.forEach((item) => {
       if (item.status === 'done') {
@@ -211,16 +211,21 @@ export class FilesComponent implements OnInit {
     if (this.fileList.length) {
       const s = this.fileList.length;
       const t = this.toSize(total, true);
-      const b = this.allDone ? '' : this.toSize(balance, true) + '/';
+      const b = this.toSize(balance, true);
 
       // ---speed
       const size = balance - this.oldBalance;
-      const speed = size > 0 ? this.toSize(size, true) : '--';
-      this.speed = speed + '/s';
+      let speed = '--';
+      if (size > 0) {
+        speed = `${this.toSize(size, true)}/s`;
+      }
       //  speed---
 
+
+      this.speedInfo = `${speed} ${done}/${s}`
+      this.uplodInfo = this.allDone ? `Total: ${s} (${t})` : `${b}/${t}`;
+
       this.oldBalance = balance;
-      this.uplodInfo = `Total: ${s} (${b}${t})`;
     }
   }
 
@@ -243,5 +248,5 @@ export class FilesComponent implements OnInit {
   // }
   // }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
