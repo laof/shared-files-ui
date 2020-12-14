@@ -2,7 +2,7 @@
   <button (click)="clearList()" nz-button>
     <i nz-icon nzType="clear" nzTheme="outline"></i> Clear
   </button>
-  <span>{{ uplodInfo() }}</span>
+  <span [class.done]="allDone">{{ uplodInfo() }}</span>
 </div>
 
 <div class="clearfix view upload-list" [class.size]="fileList.length">

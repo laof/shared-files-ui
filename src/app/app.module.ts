@@ -22,11 +22,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { antDesignIcons } from './icons';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(en);
 
 const LoadNzModuel = [
   NzMenuModule,
+  NzMessageModule,
   NzModalModule,
   NzUploadModule,
   NzSwitchModule,

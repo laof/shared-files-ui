@@ -5,6 +5,7 @@ import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { HttpLocalhost, HttpUrl } from '../shared/http/http-url';
 import { CommonStorageService } from '../shared/service/storage.service';
 import { saveAs } from 'file-saver';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 enum FileType {
   directory = 'directory',
@@ -30,6 +31,7 @@ interface FileItem {
 export class FilesComponent implements OnInit {
   private root = '';
   private fileMap: any = {};
+  allDone = false;
 
   uploadUrl = HttpUrl.upload;
 
@@ -51,7 +53,11 @@ export class FilesComponent implements OnInit {
     homePath: '',
   };
 
-  constructor(private http: HttpClient, private storage: CommonStorageService) {
+  constructor(
+    private http: HttpClient,
+    private storage: CommonStorageService,
+    private message: NzMessageService
+  ) {
     this.view = !!this.storage.getView();
     this.gridStyle = !!this.storage.getStyle();
     this.loadData();
@@ -199,6 +205,12 @@ export class FilesComponent implements OnInit {
   }
 
   uploadChange(data: NzUploadChangeParam) {
+    this.allDone = !this.fileList.find((item) => item.status !== 'done');
+
+    if (this.allDone) {
+      this.message.create('success', 'Upload successfully');
+    }
+
     // if (data.type === 'success') {
     //   const index = this.fileList.findIndex(item => {
     //     return item.uid === data.file.uid
