@@ -28,15 +28,9 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
+              "src/assets"
             ],
             "styles": [
-              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.less"
             ],
             "scripts": []
@@ -77,7 +71,8 @@
             "browserTarget": "shared-files-ui:build",
             "proxyConfig": "proxy.config.js",
             "host": "0.0.0.0",
-            "disableHostCheck": true
+            "disableHostCheck": true,
+            "port": 5700
           },
           "configurations": {
             "production": {
@@ -100,7 +95,6 @@
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.less"
             ],
             "scripts": []

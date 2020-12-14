@@ -5,23 +5,34 @@
   <span>{{ uplodInfo() }}</span>
 </div>
 
-<div class="clearfix view upload">
+<div class="clearfix view upload-list" [class.size]="fileList.length">
   <nz-upload
-    #uploadRef
     [nzAction]="uploadUrl"
     nzListType="picture"
     [nzMultiple]="true"
     nzName="upload"
+    [nzShowButton]="false"
     (nzChange)="uploadChange($event)"
     [nzData]="{ dir: cache.path }"
     [(nzFileList)]="fileList"
   >
-    <button nz-button><i nz-icon nzType="cloud-upload"></i>upload</button>
+    <a #uploadTaget></a>
   </nz-upload>
 </div>
 
 <div *ngIf="!loading; else loadingRef">
-  <div class="path">{{ cache.path }}</div>
+  <div class="path">
+    <span>{{ cache.path }}</span>
+    <button
+      (click)="uploadTaget.click()"
+      nz-button
+      nzType="primary"
+      [nzSize]="size"
+      nzShape="circle"
+    >
+      <i nz-icon nzType="cloud-upload"></i>
+    </button>
+  </div>
   <div class="bar view">
     <ul class="btn">
       <li (click)="home()">
@@ -39,15 +50,15 @@
         [ngModel]="gridStyle"
         class="style"
         (ngModelChange)="onStyleChange($event)"
-        nzCheckedChildren="grid"
-        nzUnCheckedChildren="grid"
+        nzCheckedChildren="Grid"
+        nzUnCheckedChildren="Grid"
       ></nz-switch>
 
       <nz-switch
         [ngModel]="view"
         (ngModelChange)="onViewChange($event)"
-        nzCheckedChildren="view"
-        nzUnCheckedChildren="view"
+        nzCheckedChildren="View"
+        nzUnCheckedChildren="View"
       ></nz-switch>
     </div>
   </div>
