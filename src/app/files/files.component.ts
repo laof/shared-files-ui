@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { HttpLocalhost, HttpUrl } from '../shared/http/http-url';
 import { CommonStorageService } from '../shared/service/storage.service';
 import { saveAs } from 'file-saver';
-import { Observable } from 'rxjs/internal/Observable';
-import { Observer } from 'rxjs/internal/types';
 
 enum FileType {
   directory = 'directory',
