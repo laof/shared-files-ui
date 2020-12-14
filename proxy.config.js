@@ -3,7 +3,7 @@ const PROXY_CONFIG = {
     target: "http://localhost:5200",
     secure: false,
     changeOrigin: true,
-    logLevel: "info",
+    logLevel: "debug",
   },
 };
 
