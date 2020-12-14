@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { HttpUrl } from './shared/http/http-url';
 import { toDataURL } from 'qrcode'
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent {
   host: string = '';
   hostDataUrl = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private message: NzMessageService, private http: HttpClient) {
     this.http.post(HttpUrl.host, null).subscribe((data: any) => {
       this.host = data.host;
     });
@@ -25,6 +26,10 @@ export class AppComponent {
   }
 
   scan() {
+    if (!this.host) {
+      this.message.error('Service address error');
+      return;
+    }
     toDataURL(this.host)
       .then(url => {
         this.hostDataUrl = url;
